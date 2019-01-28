@@ -1,15 +1,22 @@
 //
 //  main.cpp
-//  Project1
+//  Project 1
 //
-//  Created by Cam on 1/28/19.
-//  Copyright © 2019 Cam Brown. All rights reserved.
+//  Created by Cam on 1/22/2019.
+//  Copyright © 2019 Cameron Brown. All rights reserved.
 //
 
+#include <string>
 #include <iostream>
+#include "Scanner.h"
+#include "Token.h"
 
-int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
-    return 0;
+using namespace std;
+
+int main(int argc, char* argv[]){
+	//string fileName = argv[1];
+	//Scanner myScanner(fileName);
+	//myScanner.scan();
+
+	return 0;
 }
