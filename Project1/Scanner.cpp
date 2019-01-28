@@ -24,14 +24,11 @@ Scanner :: ~Scanner() {
 
 string Scanner :: scan() {
   ifstream inputFile;
-  inputFile.open(file, ifstream::in);
-  if(inputFile.is_open()) { //Verify that inputFile is open
-    next = inputFile.peek();
-    while(next != EOF) {
+  inputFile.open(file, ifstream::in);  //Open input file
+  if(inputFile.is_open()) {            //Verify that inputFile is open
       current = inputFile.get();
-      
       next = inputFile.peek();
-    }
+    
 
 
   }
