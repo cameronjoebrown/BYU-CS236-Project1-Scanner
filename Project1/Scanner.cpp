@@ -302,4 +302,5 @@ void Scanner :: printVector() {
     for(int i=0; i < tokenVector.size(); ++i) {
         (tokenVector.at(i)).printToken();
     }
+    cout << "Total Tokens = " << tokenVector.size();
 }
