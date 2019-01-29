@@ -299,7 +299,9 @@ void Scanner :: checkOther() {
 }
 
 void Scanner :: printVector() {
-    for(int i=0; i < tokenVector.size(); ++i) {
+    unsigned long unsign = tokenVector.size();
+    int vectorSize = (int)unsign;
+    for(int i=0; i < vectorSize; ++i) {
         (tokenVector.at(i)).printToken();
     }
     cout << "Total Tokens = " << tokenVector.size();
