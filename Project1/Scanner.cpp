@@ -45,11 +45,11 @@ void Scanner :: scan() {
             case '+':
                 tokenVector.push_back(Token(ADD, "+", lineNum));
                 break;
-            case '(':
-                tokenVector.push_back(Token(RIGHT_PAREN, "(", lineNum));
-                break;
             case ')':
-                tokenVector.push_back(Token(ADD, ")", lineNum));
+                tokenVector.push_back(Token(RIGHT_PAREN, ")", lineNum));
+                break;
+            case '(':
+                tokenVector.push_back(Token(LEFT_PAREN, "(", lineNum));
                 break;
             case ':':
                 if(inputFile.peek() == '-'){
@@ -72,6 +72,10 @@ void Scanner :: scan() {
                 break;
             case '\n':
                 lineNum++;
+                break;
+            case '\t':
+                break;
+            case ' ':
                 break;
             default:
                 checkOther(); // Check all the tokens not tried yet
@@ -197,8 +201,6 @@ void Scanner :: checkOther() {
         return;
     }
     else if(isalpha(current)) {
-        current = inputFile.get();
-        temp += current;
         while(otherScan) {
             if(isspace(inputFile.peek())) {
                 if(temp.compare(scheme) == 0) {
@@ -255,7 +257,7 @@ void Scanner :: checkOther() {
                 }
                 
             }
-            else if(inputFile.peek() == ':') {
+            else if(inputFile.peek() == ':' || inputFile.peek() == '(' || inputFile.peek() == ',' || inputFile.peek() == ')' || inputFile.peek() == '?' || inputFile.peek() == '.' || inputFile.peek() == '*' || inputFile.peek() == '+') {
                 if(temp.compare(scheme) == 0) {
                     tokenVector.push_back(Token(SCHEMES, temp, lineNum));
                     otherScan = false;

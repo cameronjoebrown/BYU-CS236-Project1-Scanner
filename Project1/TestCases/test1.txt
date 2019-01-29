@@ -1,8 +1,7 @@
-'Schemesadfadsfadsfadfadsfa
-adfadsfsdfsdfa'
 
-Facts:'
+Queries:
+marriedTo ('Bea' , 'Zed')?
 
-# Comment
+Rules:
+marriedTo( X,Y ) :- marriedTo(Y,X) .
 
-#| false comment
