@@ -27,7 +27,7 @@ public:
     void commentCheck();
     void multiLineCheck();
     void checkOther();
-
+    
 private:
     string file;
     int lineNum;

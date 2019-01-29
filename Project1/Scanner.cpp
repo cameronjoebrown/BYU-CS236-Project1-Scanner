@@ -80,9 +80,9 @@ void Scanner :: scan() {
             default:
                 checkOther(); // Check all the tokens not tried yet
                 break;
-
+                
         }
-       
+        
     }
     
 }

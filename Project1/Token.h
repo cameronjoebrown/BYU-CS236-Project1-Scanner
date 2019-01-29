@@ -22,9 +22,9 @@ enum TokenType {
 
 class Token {
 public:
-	Token(TokenType t, string val, int numLine);
-	~Token();
-	string toString();
+    Token(TokenType t, string val, int numLine);
+    ~Token();
+    string toString();
     void printToken();
 private:
     TokenType type;

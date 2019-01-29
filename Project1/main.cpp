@@ -15,9 +15,9 @@
 using namespace std;
 
 int main(int argc, char* argv[]){
-	string fileName = argv[1];
-	Scanner myScanner(fileName);
-	myScanner.scan();
+    string fileName = argv[1];
+    Scanner myScanner(fileName);
+    myScanner.scan();
     myScanner.printVector();
-	return 0;
+    return 0;
 }
