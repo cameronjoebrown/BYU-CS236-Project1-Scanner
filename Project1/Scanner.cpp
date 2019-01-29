@@ -15,18 +15,18 @@
 using namespace std;
 
 Scanner :: Scanner(string fileName) {
-  file = fileName;
-  lineNum = 1;
+    file = fileName;
+    lineNum = 1;
+    inputFile.open(file, ifstream::in);
 }
 
 Scanner :: ~Scanner() {
-
+    if(inputFile.is_open()) {
+        inputFile.close();
+    }
 }
 
 void Scanner :: scan() {
-    ifstream inputFile;
-    inputFile.open(file, ifstream::in);
-    char current;
     while(inputFile.is_open()) {
         current = inputFile.get();
         switch(current) {
@@ -62,7 +62,7 @@ void Scanner :: scan() {
                 break;
             case EOF:
                 tokenVector.push_back(Token(END, "", lineNum));
-                inputFile.close(); //CHECK!!!!
+                inputFile.close();
                 break;
             case '\'':
                 stringCheck();
@@ -84,19 +84,220 @@ void Scanner :: scan() {
 }
 
 void Scanner :: stringCheck() {
-    
+    bool stringScan = true;
+    string temp = "";
+    temp += current;
+    int lineStart = lineNum;
+    while(stringScan) {
+        if(inputFile.peek() == '\''){
+            current = inputFile.get();
+            temp += current;
+            if(inputFile.peek() == '\'') { //keep looking, just apostraphe
+                current = inputFile.get();
+                temp += current;
+            }
+            else { //string found
+                tokenVector.push_back(Token(STRING, temp, lineStart));
+                stringScan = false;
+                break;
+            }
+        }
+        else if(inputFile.peek() == EOF) {
+            tokenVector.push_back(Token(UNDEFINED, temp, lineStart));
+            stringScan = false;
+            break;
+        }
+        else if(isspace(inputFile.peek())){
+            if(inputFile.peek() == '\n') {
+                lineNum++;
+            }
+            current = inputFile.get(); // NEEDS FIXING!!!!
+            temp += current;
+        }
+        else {
+            current = inputFile.get();
+            temp += current;
+        }
+        
+    }
 }
 
 void Scanner :: commentCheck() {
-    
+    if(inputFile.peek() == '|') { // Multi-line comment
+        multiLineCheck();
+        return;
+    }
+    bool commentScan = true;
+    string temp = "";
+    temp += current;
+    while(commentScan) {
+        if(inputFile.peek() == '\n') {
+            tokenVector.push_back(Token(COMMENT, temp, lineNum));
+            commentScan = false;
+            break;
+        }
+        else if(inputFile.peek() == EOF) { // Comment didn't end. UNDEFINED
+            tokenVector.push_back(Token(COMMENT, temp, lineNum));
+            commentScan = false;
+            break;
+        }
+        else {
+            current = inputFile.get();
+            temp += current;
+        }
+    }
+}
+void Scanner :: multiLineCheck() {
+    bool commentScan = true;
+    string temp = "";
+    temp += current;
+    int lineStart = lineNum;
+    while(commentScan) {
+        if(inputFile.peek() == '|') {
+            current = inputFile.get();
+            temp += current;
+            if(inputFile.peek() == '#') { // Finished
+                tokenVector.push_back(Token(COMMENT, temp, lineStart));
+                commentScan = false;
+                break;
+            }
+        }
+        else if(inputFile.peek() == EOF) { // Comment didn't end. UNDEFINED
+            tokenVector.push_back(Token(UNDEFINED, temp, lineStart));
+            commentScan = false;
+            break;
+        }
+        else if(isspace(inputFile.peek())){
+            if(inputFile.peek() == '\n') {
+                lineNum++;
+            }
+            current = inputFile.get(); //Needs fixing possibly!
+            temp += current;
+        }
+        else {
+            current = inputFile.get();
+            temp += current;
+        }
+    }
 }
 
 void Scanner :: checkOther() {
+    bool otherScan = true;
+    string temp = "";
+    temp += current;
+    string scheme = "Schemes";
+    string fact = "Facts";
+    string rule = "Rules";
+    string query = "Queries";
     
+    if(isdigit(current)) {
+        string s = "";
+        s += current;
+        tokenVector.push_back(Token(UNDEFINED, s, lineNum));
+        return;
+    }
+    else if(isalpha(current)) {
+        current = inputFile.get();
+        temp += current;
+        while(otherScan) {
+            if(isspace(inputFile.peek())) {
+                if(temp.compare(scheme) == 0) {
+                    tokenVector.push_back(Token(SCHEMES, temp, lineNum));
+                    otherScan = false;
+                    break;
+                }
+                else if(temp.compare(fact) == 0) {
+                    tokenVector.push_back(Token(FACTS, temp, lineNum));
+                    otherScan = false;
+                    break;
+                }
+                else if(temp.compare(rule) == 0) {
+                    tokenVector.push_back(Token(RULES, temp, lineNum));
+                    otherScan = false;
+                    break;
+                }
+                else if(temp.compare(query) == 0) {
+                    tokenVector.push_back(Token(QUERIES, temp, lineNum));
+                    otherScan = false;
+                    break;
+                }
+                else {
+                    tokenVector.push_back(Token(ID, temp, lineNum));
+                    otherScan = false;
+                    break;
+                }
+            }
+            else if(inputFile.peek() == EOF) {
+                if(temp.compare(scheme) == 0) {
+                    tokenVector.push_back(Token(SCHEMES, temp, lineNum));
+                    otherScan = false;
+                    break;
+                }
+                else if(temp.compare(fact) == 0) {
+                    tokenVector.push_back(Token(FACTS, temp, lineNum));
+                    otherScan = false;
+                    break;
+                }
+                else if(temp.compare(rule) == 0) {
+                    tokenVector.push_back(Token(RULES, temp, lineNum));
+                    otherScan = false;
+                    break;
+                }
+                else if(temp.compare(query) == 0) {
+                    tokenVector.push_back(Token(QUERIES, temp, lineNum));
+                    otherScan = false;
+                    break;
+                }
+                else {
+                    tokenVector.push_back(Token(ID, temp, lineNum));
+                    otherScan = false;
+                    break;
+                }
+                
+            }
+            else if(inputFile.peek() == ':') {
+                if(temp.compare(scheme) == 0) {
+                    tokenVector.push_back(Token(SCHEMES, temp, lineNum));
+                    otherScan = false;
+                    break;
+                }
+                else if(temp.compare(fact) == 0) {
+                    tokenVector.push_back(Token(FACTS, temp, lineNum));
+                    otherScan = false;
+                    break;
+                }
+                else if(temp.compare(rule) == 0) {
+                    tokenVector.push_back(Token(RULES, temp, lineNum));
+                    otherScan = false;
+                    break;
+                }
+                else if(temp.compare(query) == 0) {
+                    tokenVector.push_back(Token(QUERIES, temp, lineNum));
+                    otherScan = false;
+                    break;
+                }
+                else {
+                    tokenVector.push_back(Token(ID, temp, lineNum));
+                    otherScan = false;
+                    break;
+                }
+            }
+            else {
+                current = inputFile.get();
+                temp += current;
+            }
+        }
+    }
+    else {
+        string s = "";
+        s += current;
+        tokenVector.push_back(Token(UNDEFINED, s, lineNum));
+        return;
+    }
 }
 
 void Scanner :: printVector() {
     for(int i=0; i < tokenVector.size(); ++i) {
-        cout << tokenVector.at(i).toString() << endl;
+        (tokenVector.at(i)).printToken();
     }
 }

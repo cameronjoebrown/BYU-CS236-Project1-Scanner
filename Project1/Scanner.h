@@ -25,14 +25,15 @@ public:
     void printVector();
     void stringCheck();
     void commentCheck();
+    void multiLineCheck();
     void checkOther();
 
 private:
     string file;
     int lineNum;
     char current;
-    char next;
     vector<Token> tokenVector;
+    ifstream inputFile;
 };
 
 #endif /* scanner.h */
