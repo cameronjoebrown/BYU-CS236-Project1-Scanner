@@ -8,15 +8,16 @@
 
 #include <string>
 #include <iostream>
+#include <fstream>
 #include "Scanner.h"
 #include "Token.h"
 
 using namespace std;
 
 int main(int argc, char* argv[]){
-	//string fileName = argv[1];
-	//Scanner myScanner(fileName);
-	//myScanner.scan();
-
+	string fileName = argv[1];
+	Scanner myScanner(fileName);
+	myScanner.scan();
+    myScanner.printVector();
 	return 0;
 }

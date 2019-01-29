@@ -9,6 +9,7 @@
 #define Token_h
 
 #include <string>
+#include <iostream>
 
 using namespace std;
 
@@ -21,12 +22,14 @@ enum TokenType {
 
 class Token {
 public:
-	Token(TokenType t);
+	Token(TokenType t, string val, int numLine);
 	~Token();
 	string toString();
+    void printToken();
 private:
-  TokenType type;
-
+    TokenType type;
+    string value;
+    int lineNum;
 };
 
 #endif /* Token.h */

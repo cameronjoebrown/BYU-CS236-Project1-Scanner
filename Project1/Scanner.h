@@ -12,21 +12,27 @@
 #include "Token.h"
 #include <vector>
 #include <fstream>
+#include <iostream>
 
 using namespace std;
 
 class Scanner {
 public:
-  Scanner(string fileName);
-  ~Scanner();
-  string scan();
-  void tokenize();
+    Scanner(string fileName);
+    ~Scanner();
+    void scan();
+    void tokenize();
+    void printVector();
+    void stringCheck();
+    void commentCheck();
+    void checkOther();
 
 private:
-  string file;
-  int lineNum;
-  char current;
-  char next;
+    string file;
+    int lineNum;
+    char current;
+    char next;
+    vector<Token> tokenVector;
 };
 
 #endif /* scanner.h */

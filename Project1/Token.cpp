@@ -7,9 +7,12 @@
 //
 
 #include "Token.h"
+#include <iostream>
 
-Token :: Token(TokenType t) {
-  type = t;
+Token :: Token(TokenType t, string val, int numLine) {
+    type = t;
+    value = val;
+    lineNum = numLine;
 }
 
 Token :: ~Token() {
@@ -74,4 +77,8 @@ string Token :: toString() {
       return "ID";
       break;
   }
+}
+
+void Token :: printToken() {
+    cout << "(" << toString() << "," << "\"" << value << "\"," << lineNum << ")" << endl;
 }

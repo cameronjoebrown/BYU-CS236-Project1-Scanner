@@ -31,7 +31,7 @@
 		52ADE62221FF72BF001AD0C9 /* Scanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scanner.h; sourceTree = "<group>"; };
 		52ADE62421FF72BF001AD0C9 /* Token.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Token.cpp; sourceTree = "<group>"; };
 		52ADE62521FF72BF001AD0C9 /* Token.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Token.h; sourceTree = "<group>"; };
-		52ADE62821FF77FF001AD0C9 /* Test Cases */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Test Cases"; sourceTree = "<group>"; };
+		52ADE62921FFD95D001AD0C9 /* TestCases */ = {isa = PBXFileReference; lastKnownFileType = folder; path = TestCases; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,7 +64,7 @@
 		52ADE61921FF7284001AD0C9 /* Project1 */ = {
 			isa = PBXGroup;
 			children = (
-				52ADE62821FF77FF001AD0C9 /* Test Cases */,
+				52ADE62921FFD95D001AD0C9 /* TestCases */,
 				52ADE62121FF72BF001AD0C9 /* Scanner.cpp */,
 				52ADE62221FF72BF001AD0C9 /* Scanner.h */,
 				52ADE62421FF72BF001AD0C9 /* Token.cpp */,
