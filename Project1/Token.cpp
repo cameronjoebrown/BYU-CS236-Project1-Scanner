@@ -62,7 +62,7 @@ string Token :: toString() {
       return "COMMENT";
       break;
     case(END):
-      return "END";
+      return "EOF";
       break;
     case(UNDEFINED):
       return "UNDEFINED";
