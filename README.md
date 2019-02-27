@@ -6,5 +6,4 @@ output each of these tokens with the token, the name of the token, and the line 
 was found, it was assigned a token name of UNDEFINED.
 
 This project had to be passed off in person by the TAs for the course by running different test cases on our program. Unlike
-my previous CS classes, we weren't given the test cases the TAs would use beforehand so I had to make my own test cases to 
-prepare to pass it off.
+my previous CS classes, we weren't given all the test cases that we would be tested on beforehand so I had to make my own test cases to prepare to pass it off.
